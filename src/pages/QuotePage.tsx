@@ -19,8 +19,8 @@ export default function QuotePage() {
 
   return (
     <>
-      <section className="relative min-h-[40vh] pt-[72px]">
-        <div className="container-nx py-16 md:py-20">
+      <section className="relative pt-32 pb-12">
+        <div className="container-nx">
           <SectionLabel>Free Estimate</SectionLabel>
           <h1 className="mt-6 max-w-4xl text-display-xl font-display font-bold text-primary">
             Get Your <span className="text-accent">Free Quote</span>
@@ -112,7 +112,7 @@ export default function QuotePage() {
                           <Input label="Full Name" placeholder="Your name" required />
                           <Input label="Phone" type="tel" placeholder="+91 _____ _____" required />
                         </div>
-                        <Input label="Email" type="email" placeholder="you@company.com" />
+                        <Input label="Email" type="email" placeholder="you@company.com" required />
                       </div>
                     )}
                     {step === 1 && (
@@ -120,16 +120,16 @@ export default function QuotePage() {
                         <h3 className="font-display text-xl font-bold text-primary">Project Details</h3>
                         <div className="space-y-2">
                           <label className="text-sm font-medium text-primary">Service Required</label>
-                          <select className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm">
+                          <select required className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20">
                             <option value="">Select service…</option>
                             {SERVICE_OPTIONS.map((s) => <option key={s}>{s}</option>)}
                           </select>
                         </div>
                         <div className="grid gap-5 sm:grid-cols-2">
-                          <Input label="Quantity" placeholder="e.g. 500 pieces" />
+                          <Input label="Quantity" placeholder="e.g. 500 pieces" required />
                           <div className="space-y-2">
                             <label className="text-sm font-medium text-primary">Budget Range</label>
-                            <select className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm">
+                            <select required className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20">
                               <option value="">Select budget…</option>
                               <option>Under ₹5,000</option>
                               <option>₹5,000 – ₹15,000</option>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import type { LucideIcon } from 'lucide-react'
 import {
@@ -17,6 +17,9 @@ import {
   Shield,
   HelpCircle,
   Phone,
+  Palette,
+  Package,
+  Monitor,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/utils/cn'
@@ -29,7 +32,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import { ROUTES } from '@/constants/routes'
+import { ROUTES, serviceUrl } from '@/constants/routes'
 
 type LinkItem = {
   title: string
@@ -39,12 +42,18 @@ type LinkItem = {
 }
 
 const serviceLinks: LinkItem[] = [
-  { title: 'Digital Printing', href: ROUTES.services, description: 'Business cards, brochures, flyers & more', icon: Printer },
-  { title: 'Large Format Printing', href: ROUTES.services, description: 'Banners, hoardings & building wraps', icon: Layers },
-  { title: 'Sign Boards', href: ROUTES.services, description: 'ACP, LED & acrylic signage', icon: Signpost },
-  { title: 'Vehicle Branding', href: ROUTES.services, description: 'Car wraps, fleet graphics & auto branding', icon: Car },
-  { title: 'Corporate Branding', href: ROUTES.services, description: 'Complete identity & office branding', icon: Building2 },
-  { title: 'Exhibition Branding', href: ROUTES.services, description: 'Trade show booths & event displays', icon: Tent },
+  { title: 'Digital Printing', href: serviceUrl('digital-printing'), description: 'Business cards, brochures, flyers & more', icon: Printer },
+  { title: 'Large Format', href: serviceUrl('large-format'), description: 'Banners, hoardings & building wraps', icon: Layers },
+  { title: 'ACP Sign Boards', href: serviceUrl('acp-signboards'), description: 'Aluminium composite panel signage', icon: Signpost },
+  { title: 'LED Sign Boards', href: serviceUrl('led-signboards'), description: 'Glowing, energy-efficient signage', icon: Monitor },
+  { title: 'Vehicle Branding', href: serviceUrl('vehicle-branding'), description: 'Car wraps, fleet graphics & auto branding', icon: Car },
+  { title: 'Corporate Branding', href: serviceUrl('corporate-branding'), description: 'Complete identity & office branding', icon: Building2 },
+  { title: 'Indoor Branding', href: serviceUrl('indoor-branding'), description: 'Wall graphics, office & retail interiors', icon: Palette },
+  { title: 'Exhibition Branding', href: serviceUrl('exhibition-branding'), description: 'Trade show booths & event displays', icon: Tent },
+  { title: 'Corporate Gifts', href: serviceUrl('corporate-gifts'), description: 'Branded merchandise & giveaways', icon: Package },
+  { title: 'T-Shirt Printing', href: serviceUrl('tshirt-printing'), description: 'Custom tees for teams & events', icon: Printer },
+  { title: 'Offset Printing', href: serviceUrl('offset-printing'), description: 'Catalogues, magazines & books', icon: FileText },
+  { title: 'Fabrication', href: serviceUrl('fabrication'), description: 'In-house fabrication & installation', icon: Layers },
 ]
 
 const companyLinks: LinkItem[] = [
@@ -80,12 +89,16 @@ function useScroll(threshold: number) {
 }
 
 function Wordmark() {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <Link to={ROUTES.home} className="flex flex-col leading-none hover:opacity-80 transition-opacity">
-      <span className="font-display text-lg font-bold tracking-tight text-primary">
-        Nexus<span className="text-accent">Media</span>
+    <Link to={ROUTES.home} onClick={handleClick} className="flex flex-col leading-none hover:opacity-80 transition-opacity">
+      <span className="font-display text-lg font-bold tracking-tight">
+        <span className="text-primary">nexus</span><span className="text-accent">Media</span>
       </span>
-      <span className="mt-0.5 text-[8px] uppercase tracking-[0.25em] text-muted-foreground">Belgaum</span>
+      <span className="mt-0.5 text-[8px] uppercase tracking-[0.25em] text-muted-foreground">Belgaum · Print · Branding</span>
     </Link>
   )
 }
@@ -113,15 +126,37 @@ function ListItem({ title, description, icon: Icon, className, href, ...props }:
   )
 }
 
-type MobileMenuProps = React.ComponentProps<'div'> & { open: boolean }
+function MobileListItem({ title, description, icon: Icon, className, href, onClick }: LinkItem & { className?: string, onClick?: () => void }) {
+  return (
+    <Link 
+      to={href} 
+      onClick={onClick}
+      className={cn(
+        'flex w-full flex-row gap-x-3 rounded-lg p-2 hover:bg-muted hover:text-primary focus:bg-muted',
+        className
+      )}
+    >
+      <div className="flex aspect-square size-11 shrink-0 items-center justify-center rounded-lg border border-border bg-background shadow-sm">
+        <Icon className="size-5 text-primary" />
+      </div>
+      <div className="flex flex-col items-start justify-center">
+        <span className="text-sm font-medium text-primary">{title}</span>
+        {description && <span className="text-xs text-muted-foreground">{description}</span>}
+      </div>
+    </Link>
+  )
+}
 
-function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
+type MobileMenuProps = React.ComponentProps<'div'> & { open: boolean; headerHeight: number }
+
+function MobileMenu({ open, children, className, headerHeight, ...props }: MobileMenuProps) {
   if (!open || typeof window === 'undefined') return null
 
   return createPortal(
     <div
       id="mobile-menu"
-      className="fixed top-14 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y border-border bg-background/95 backdrop-blur-lg md:hidden"
+      className="fixed right-0 bottom-0 left-0 z-[80] flex flex-col overflow-hidden border-y border-border bg-background/98 backdrop-blur-xl lg:hidden"
+      style={{ top: headerHeight }}
     >
       <div data-slot={open ? 'open' : 'closed'} className={cn('size-full overflow-y-auto p-4', className)} {...props}>
         {children}
@@ -134,6 +169,26 @@ function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
 export function Header() {
   const [open, setOpen] = React.useState(false)
   const scrolled = useScroll(10)
+  const location = useLocation()
+  const headerRef = React.useRef<HTMLElement>(null)
+  const [headerHeight, setHeaderHeight] = React.useState(56)
+
+  // Measure actual header height for portal positioning
+  React.useEffect(() => {
+    const measure = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight)
+      }
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  // Close mobile menu on route change
+  React.useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
 
   React.useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -142,32 +197,36 @@ export function Header() {
 
   return (
     <header
-      className={cn('sticky top-0 z-50 w-full border-b border-transparent', {
-        'border-border bg-background/95 backdrop-blur-lg shadow-sm': scrolled,
+      ref={headerRef}
+      className={cn('sticky top-0 z-[70] w-full border-b border-transparent transition-all duration-300', {
+        'border-border/50 bg-background/50 backdrop-blur-xl shadow-sm': scrolled,
+        'bg-background': !scrolled,
       })}
     >
-      <nav className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
+      <nav className="mx-auto flex h-14 w-full max-w-[1440px] items-center justify-between px-5 lg:px-10">
         <div className="flex items-center gap-5">
           <Wordmark />
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">Services</NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-background p-1.5">
-                  <ul className="grid w-lg grid-cols-2 gap-2 rounded-lg border border-border bg-popover p-2 shadow-lg">
-                    {serviceLinks.map((item) => (
-                      <li key={item.title}>
-                        <ListItem {...item} />
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="p-2">
-                    <p className="text-sm text-muted-foreground">
-                      Need a custom solution?{' '}
-                      <Link to={ROUTES.quote} className="font-medium text-accent hover:underline">
-                        Get a free quote
-                      </Link>
-                    </p>
+                  <div className="w-[640px] rounded-lg border border-border bg-popover p-3 shadow-lg">
+                    <ul className="grid grid-cols-3 gap-1.5">
+                      {serviceLinks.map((item) => (
+                        <li key={item.title}>
+                          <ListItem {...item} />
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-3 border-t border-border pt-3">
+                      <p className="text-sm text-muted-foreground">
+                        Need a custom solution?{' '}
+                        <Link to={ROUTES.quote} className="font-medium text-accent hover:underline">
+                          Get a free quote
+                        </Link>
+                      </p>
+                    </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -175,7 +234,7 @@ export function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">Company</NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-background p-1.5">
-                  <div className="grid w-lg grid-cols-2 gap-2">
+                  <div className="grid w-[440px] grid-cols-2 gap-2">
                     <ul className="space-y-1 rounded-lg border border-border bg-popover p-2 shadow-lg">
                       {companyLinks.map((item) => (
                         <li key={item.title}>
@@ -213,7 +272,7 @@ export function Header() {
           </NavigationMenu>
         </div>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <Button variant="outline" size="sm" asChild>
             <a href="tel:9535289007">
               <Phone className="size-3.5" />
@@ -229,7 +288,7 @@ export function Header() {
           size="sm"
           variant="outline"
           onClick={() => setOpen(!open)}
-          className="md:hidden size-9 p-0"
+          className="lg:hidden size-9 p-0"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label="Toggle menu"
@@ -238,23 +297,25 @@ export function Header() {
         </Button>
       </nav>
 
-      <MobileMenu open={open} className="flex flex-col justify-between gap-4">
-        <div className="flex w-full flex-col gap-y-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Services</span>
-          {serviceLinks.map((link) => (
-            <ListItem key={link.title} {...link} onClick={() => setOpen(false)} />
-          ))}
-          <span className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Company</span>
+      <MobileMenu open={open} headerHeight={headerHeight} className="flex flex-col justify-between gap-4">
+        <div className="flex w-full flex-col gap-y-1">
+          <span className="px-2 pt-2 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Services</span>
+          <div className="grid grid-cols-2 gap-1">
+            {serviceLinks.map((link) => (
+              <MobileListItem key={link.title} {...link} onClick={() => setOpen(false)} />
+            ))}
+          </div>
+          <span className="mt-4 px-2 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Company</span>
           {companyLinks.map((link) => (
-            <ListItem key={link.title} {...link} onClick={() => setOpen(false)} />
+            <MobileListItem key={link.title} {...link} onClick={() => setOpen(false)} />
           ))}
           {companyLinks2.map((link) => (
-            <ListItem key={link.title} {...link} onClick={() => setOpen(false)} />
+            <MobileListItem key={link.title} {...link} onClick={() => setOpen(false)} />
           ))}
         </div>
-        <div className="flex flex-col gap-2 pb-4">
+        <div className="flex flex-col gap-2 pb-6 pt-2 border-t border-border">
           <Button variant="outline" className="w-full" asChild>
-            <a href="tel:9535289007">Call Us</a>
+            <a href="tel:9535289007"><Phone className="size-4" />Call Us</a>
           </Button>
           <Button className="w-full" asChild>
             <Link to={ROUTES.quote} onClick={() => setOpen(false)}>Get Started</Link>

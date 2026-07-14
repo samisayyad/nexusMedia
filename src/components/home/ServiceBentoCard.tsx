@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   Printer,
   Palette,
   Package,
   Truck,
   BarChart3,
-  Search,
   TrendingUp,
   FileText,
   Image,
@@ -14,9 +14,12 @@ import {
   Plus,
   ArrowUpRight,
   FolderOpen,
+  Zap,
+  Shield,
   type LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/utils/cn'
+import { serviceUrl } from '@/constants/routes'
 
 interface TabConfig {
   id: string
@@ -33,6 +36,11 @@ interface ServiceBentoCardProps {
   subtitle: string
   tabs: TabConfig[]
   className?: string
+  serviceId?: string
+  benefits?: string[]
+  tags?: string[]
+  stats?: { projects: string; turnaround: string }
+  defaultTab?: string
 }
 
 const defaultTabs = (serviceTitle: string): TabConfig[] => [
@@ -42,32 +50,57 @@ const defaultTabs = (serviceTitle: string): TabConfig[] => [
   { id: 'delivery', label: 'Delivery', icon: Truck, header: 'Dispatch & Install', description: 'Delivery tracking across Belgaum.' },
 ]
 
-export function ServiceBentoCard({ id = 'bento', title, subtitle, tabs, className }: ServiceBentoCardProps) {
-  const [activeTab, setActiveTab] = useState(tabs[0])
+export function ServiceBentoCard({ id = 'bento', title, subtitle, tabs, className, serviceId, benefits = [], tags = [], stats, defaultTab }: ServiceBentoCardProps) {
+  const initialTab = defaultTab ? (tabs.find(t => t.id === defaultTab) ?? tabs[0]) : tabs[0]
+  const [activeTab, setActiveTab] = useState(initialTab)
 
   const content = useMemo(() => {
     switch (activeTab.id) {
       case 'overview':
-        return <OverviewPanel />
+        return <OverviewPanel stats={stats} />
       case 'design':
-        return <DesignPanel />
+        return <DesignPanel tags={tags} />
       case 'production':
-        return <ProductionPanel />
+        return <ProductionPanel serviceTitle={title} />
       case 'delivery':
         return <DeliveryPanel />
       default:
-        return <OverviewPanel />
+        return <OverviewPanel stats={stats} />
     }
-  }, [activeTab.id])
+  }, [activeTab.id, stats, tags, title])
+
+  const CardWrapper = serviceId ? Link : 'div'
+  const wrapperProps = serviceId ? { to: serviceUrl(serviceId) } : {}
 
   return (
     <div className={cn('w-full max-w-xl shrink-0', className)}>
       <div className="group relative w-full overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/5 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/10">
+        {/* Header */}
         <div className="relative z-10 space-y-1.5 p-5 sm:p-6">
-          <h2 className="text-xs uppercase tracking-wider text-muted-foreground">{title}</h2>
-          <p className="max-w-[480px] text-lg font-medium leading-snug text-foreground sm:text-xl">{subtitle}</p>
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <h2 className="text-xs uppercase tracking-wider text-muted-foreground">{title}</h2>
+              <p className="mt-1 max-w-[380px] text-lg font-medium leading-snug text-foreground sm:text-xl">{subtitle}</p>
+            </div>
+            {serviceId && (
+              <CardWrapper {...(wrapperProps as any)} className="ml-3 flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-background shadow-sm transition-all hover:border-accent hover:bg-accent hover:text-white">
+                <ArrowUpRight className="size-3.5" />
+              </CardWrapper>
+            )}
+          </div>
+          {/* Tags */}
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 pt-1">
+              {tags.slice(0, 3).map((tag) => (
+                <span key={tag} className="rounded-md border border-border/60 bg-muted px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider text-muted-foreground">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
+        {/* App mockup */}
         <div className="relative h-[260px] w-full overflow-hidden sm:h-[300px]">
           <div className="absolute left-16 top-16 h-full w-full rounded-3xl border border-border/50 bg-muted opacity-80" />
           <div className="absolute left-24 top-8 flex h-full w-full flex-col overflow-hidden rounded-tl-3xl bg-background shadow-xl ring-4 ring-border">
@@ -83,6 +116,7 @@ export function ServiceBentoCard({ id = 'bento', title, subtitle, tabs, classNam
             </div>
 
             <div className="flex flex-1 overflow-hidden">
+              {/* Sidebar tabs */}
               <div className="flex w-32 flex-col gap-1 border-r border-border/30 bg-muted/5 p-2 pt-5">
                 <LayoutGroup>
                   {tabs.map((tab) => {
@@ -120,6 +154,7 @@ export function ServiceBentoCard({ id = 'bento', title, subtitle, tabs, classNam
                 </LayoutGroup>
               </div>
 
+              {/* Content panel */}
               <div className="relative flex flex-1 flex-col gap-3 overflow-hidden p-4 pt-5">
                 <header className="flex flex-col gap-0.5">
                   <h3 className="line-clamp-1 text-[10px] font-semibold uppercase tracking-tight text-foreground opacity-60">{activeTab.header}</h3>
@@ -142,12 +177,28 @@ export function ServiceBentoCard({ id = 'bento', title, subtitle, tabs, classNam
             </div>
           </div>
         </div>
+
+        {/* Benefits footer */}
+        {benefits.length > 0 && (
+          <div className="border-t border-border/40 p-4 sm:p-5">
+            <div className="grid grid-cols-2 gap-1.5">
+              {benefits.slice(0, 4).map((benefit) => (
+                <div key={benefit} className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                  <Check className="size-3 shrink-0 text-accent" />
+                  {benefit}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
-function OverviewPanel() {
+// ─── Content Panels ───────────────────────────────────────────────────────────
+
+function OverviewPanel({ stats }: { stats?: { projects: string; turnaround: string } }) {
   return (
     <div className="flex h-full flex-col gap-2">
       <div className="relative overflow-hidden rounded-xl border border-border/40 bg-gradient-to-br from-background to-muted/20 p-3">
@@ -167,15 +218,15 @@ function OverviewPanel() {
       <div className="grid grid-cols-2 gap-1.5">
         <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 p-2.5">
           <div>
-            <span className="text-[10px] font-medium text-foreground">24h</span>
+            <span className="text-[10px] font-medium text-foreground">{stats?.turnaround ?? '24-48h'}</span>
             <p className="text-[7px] uppercase text-muted-foreground">Turnaround</p>
           </div>
-          <Search className="size-3.5 opacity-20" />
+          <Zap className="size-3.5 opacity-20" />
         </div>
         <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 p-2.5">
           <div>
-            <span className="text-[10px] font-medium text-foreground">300</span>
-            <p className="text-[7px] uppercase text-muted-foreground">DPI Print</p>
+            <span className="text-[10px] font-medium text-foreground">{stats?.projects ?? '50+'}</span>
+            <p className="text-[7px] uppercase text-muted-foreground">Projects</p>
           </div>
           <TrendingUp className="size-3.5 opacity-20" />
         </div>
@@ -184,12 +235,13 @@ function OverviewPanel() {
   )
 }
 
-function DesignPanel() {
+function DesignPanel({ tags }: { tags?: string[] }) {
+  const displayTags = tags && tags.length > 0 ? tags : ['Brand Layout', 'Print Ready']
   return (
     <div className="grid h-full grid-cols-2 gap-2">
       {[
-        { title: 'Brand Layout', desc: 'Logo & colour system.', icon: Palette },
-        { title: 'Print Ready', desc: 'CMYK optimised files.', icon: FileText },
+        { title: displayTags[0] ?? 'Brand Layout', desc: 'Logo & colour system.', icon: Palette },
+        { title: displayTags[1] ?? 'Print Ready', desc: 'CMYK optimised files.', icon: FileText },
       ].map((card) => (
         <div key={card.title} className="relative flex flex-col gap-2 overflow-hidden rounded-xl border border-border/40 bg-background/50 p-3">
           <card.icon className="size-4 text-accent/60" />
@@ -204,14 +256,20 @@ function DesignPanel() {
   )
 }
 
-function ProductionPanel() {
+function ProductionPanel({ serviceTitle }: { serviceTitle: string }) {
+  const jobs = [
+    `${serviceTitle} — Order #001`,
+    'Quality Check — In Progress',
+    'Ready for Dispatch',
+  ]
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border border-border/40 bg-background/50">
       <div className="flex items-center justify-between border-b border-border/40 bg-muted/30 px-3 py-2">
         <span className="text-[8px] font-semibold uppercase tracking-wider text-muted-foreground">Active Jobs</span>
+        <Shield className="size-3 text-muted-foreground/40" />
       </div>
       <div className="flex flex-col gap-0.5 p-1">
-        {['Flex Banner — 3x6m', 'Business Cards — 500pc', 'ACP Sign Board — 4x2ft'].map((job, i) => (
+        {jobs.map((job, i) => (
           <div key={job} className="group flex items-center gap-2 rounded-lg p-2 transition-colors hover:bg-muted/30">
             <div className="flex size-5 items-center justify-center rounded-full bg-muted border border-border/40">
               <Printer className="size-2.5 text-muted-foreground" />
@@ -259,12 +317,23 @@ function DeliveryPanel() {
   )
 }
 
-export function createServiceBentoProps(serviceId: string, serviceTitle: string, serviceDesc: string) {
+export function createServiceBentoProps(
+  serviceId: string,
+  serviceTitle: string,
+  serviceDesc: string,
+  benefits: string[] = [],
+  tags: string[] = [],
+  stats?: { projects: string; turnaround: string }
+) {
   return {
     id: serviceId,
+    serviceId,
     title: serviceTitle,
     subtitle: serviceDesc,
     tabs: defaultTabs(serviceTitle),
+    benefits,
+    tags,
+    stats,
   }
 }
 
@@ -275,6 +344,8 @@ export function HeroBentoCard() {
       title="Print Studio"
       subtitle="Precision printing, bold branding, and signage — all managed from one workspace."
       tabs={defaultTabs('NexusMedia')}
+      benefits={['300 DPI quality', 'Any substrate', 'Fast turnaround', 'Colour matched']}
+      tags={['Printing', 'Signage', 'Branding', 'Design']}
     />
   )
 }

@@ -33,7 +33,7 @@ export function AnimatedMarqueeHero({
   return (
     <section
       className={cn(
-        'relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-4 pt-14 text-center',
+        'relative flex min-h-[70vh] w-full flex-col items-center justify-start overflow-hidden bg-background px-4 pt-32 pb-24 text-center',
         className
       )}
     >

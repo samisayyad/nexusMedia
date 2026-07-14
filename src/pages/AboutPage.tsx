@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Target, Eye, Zap } from 'lucide-react'
 import { AnimatedMarqueeHero } from '@/components/about/AnimatedMarqueeHero'
+import { AboutFeatureSection } from '@/components/about/AboutFeatureSection'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Button } from '@/components/ui/Button'
 import { COMPANY_TIMELINE, ABOUT_HERO_IMAGES, SITE } from '@/constants/data'
@@ -104,6 +105,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <AboutFeatureSection />
+
       <section className="section-nx bg-muted/30">
         <div className="container-nx max-w-4xl">
           <SectionLabel>Journey</SectionLabel>
@@ -131,6 +134,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
     </>
   )
 }

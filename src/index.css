@@ -148,3 +148,9 @@ html.lenis, html.lenis body {
 .animate-marquee-slow {
   animation: marquee-slow 60s linear infinite;
 }
+
+@keyframes shimmer {
+  0%   { opacity: 0.5; }
+  50%  { opacity: 1;   }
+  100% { opacity: 0.5; }
+}

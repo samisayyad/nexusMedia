@@ -11,8 +11,8 @@ export function Footer() {
       <div className="container-nx py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <Link to={ROUTES.home} className="font-display text-2xl font-bold text-primary">
-              Nexus<span className="text-accent">Media</span>
+            <Link to={ROUTES.home} className="font-display text-2xl font-bold">
+              <span className="text-primary">nexus</span><span className="text-accent">Media</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-secondary">
               Professional design and advertising agency based in Belgaum, Karnataka. We turn ideas into powerful brands.

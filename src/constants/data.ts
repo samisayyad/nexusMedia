@@ -39,7 +39,7 @@ export const CLIENTS = [
 
 export const SERVICES = [
   {
-    id: 'digital-printing',    title: 'Digital Printing',
+    id: 'digital-printing', title: 'Digital Printing',
     desc: 'High-resolution digital prints on paper, vinyl, canvas, and specialty substrates. Perfect colour accuracy every time.',
     tags: ['Business Cards', 'Brochures', 'Flyers', 'Posters'],
     stats: { projects: '120+', turnaround: '24-48h' },
@@ -48,7 +48,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
   },
   {
-    id: 'large-format',    title: 'Large Format Printing',
+    id: 'large-format', title: 'Large Format Printing',
     desc: 'Banners, hoardings, backlit displays, and building wraps at any size. Vivid, weather-resistant, and long-lasting.',
     tags: ['Banners', 'Hoardings', 'Backlit', 'Building Wrap'],
     stats: { projects: '85+', turnaround: '2-5 days' },
@@ -57,16 +57,16 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80',
   },
   {
-    id: 'offset-printing',    title: 'Offset Printing',
+    id: 'offset-printing', title: 'Offset Printing',
     desc: 'Premium offset printing for high-volume runs. Catalogues, magazines, books, and stationery with professional-grade finish.',
     tags: ['Catalogues', 'Magazines', 'Books', 'Annual Reports'],
     stats: { projects: '60+', turnaround: '5-7 days' },
     benefits: ['Cost effective bulk', 'Premium finish', 'Pantone matching', 'Sharp detail'],
     applications: ['Annual reports', 'Product catalogues', 'Magazines'],
-    image: 'https://images.unsplash.com/photo-1586953208448-b95f7f86628e?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80',
   },
   {
-    id: 'acp-signboards',    title: 'ACP Sign Boards',
+    id: 'acp-signboards', title: 'ACP Sign Boards',
     desc: 'Aluminium Composite Panel sign boards — sleek, durable, and perfect for storefronts, offices, and outdoor installations.',
     tags: ['Shop Boards', 'Office Signage', 'Outdoor', 'Indoor'],
     stats: { projects: '95+', turnaround: '3-7 days' },
@@ -75,7 +75,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80',
   },
   {
-    id: 'led-signboards',    title: 'LED Sign Boards',
+    id: 'led-signboards', title: 'LED Sign Boards',
     desc: 'Energy-efficient LED signage that glows, attracts, and converts. Custom shapes, sizes, and illumination styles.',
     tags: ['LED Boards', 'Neon Effect', 'Backlit', '3D LED'],
     stats: { projects: '70+', turnaround: '5-10 days' },
@@ -84,7 +84,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
   },
   {
-    id: 'acrylic-signboards',    title: 'Acrylic Sign Boards',
+    id: 'acrylic-signboards', title: 'Acrylic Sign Boards',
     desc: 'Crystal-clear acrylic boards with laser cutting, UV printing, and metallic letter options for premium brand presentation.',
     tags: ['Acrylic Letters', 'UV Print', 'Laser Cut', 'Premium'],
     stats: { projects: '55+', turnaround: '4-8 days' },
@@ -93,7 +93,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
-    id: 'indoor-branding',    title: 'Indoor Branding',
+    id: 'indoor-branding', title: 'Indoor Branding',
     desc: 'Transform your office, showroom, or retail interior with wall graphics, directional signage, and branded environments.',
     tags: ['Wall Graphics', 'Office Branding', 'Glass Branding', 'Directional'],
     stats: { projects: '80+', turnaround: '3-7 days' },
@@ -102,7 +102,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80',
   },
   {
-    id: 'outdoor-branding',    title: 'Outdoor Branding',
+    id: 'outdoor-branding', title: 'Outdoor Branding',
     desc: 'Hoardings, banners, pole signs, bus shelters, and outdoor displays that make your brand impossible to ignore.',
     tags: ['Hoardings', 'Pole Signs', 'Bus Shelter', 'Outdoors'],
     stats: { projects: '90+', turnaround: '5-10 days' },
@@ -111,7 +111,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
   },
   {
-    id: 'corporate-branding',    title: 'Corporate Branding',
+    id: 'corporate-branding', title: 'Corporate Branding',
     desc: 'Complete corporate identity systems — logo, stationery, brochures, signage, and digital assets under one roof.',
     tags: ['Identity', 'Stationery', 'Brand Manual', 'Signage'],
     stats: { projects: '100+', turnaround: '7-14 days' },
@@ -120,7 +120,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
   },
   {
-    id: 'vehicle-branding',    title: 'Vehicle Branding',
+    id: 'vehicle-branding', title: 'Vehicle Branding',
     desc: 'Turn every vehicle into a moving billboard. Car wraps, truck graphics, auto branding, and fleet livery.',
     tags: ['Car Wraps', 'Truck Graphics', 'Auto', 'Fleet'],
     stats: { projects: '75+', turnaround: '2-5 days' },
@@ -129,7 +129,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
   },
   {
-    id: 'exhibition-branding',    title: 'Exhibition Branding',
+    id: 'exhibition-branding', title: 'Exhibition Branding',
     desc: 'Complete exhibition stands, backdrops, popup displays, and promotional materials for trade shows and events.',
     tags: ['Exhibition Stands', 'Backdrops', 'Popup', 'Trade Shows'],
     stats: { projects: '65+', turnaround: '5-10 days' },
@@ -138,7 +138,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
   },
   {
-    id: 'fabrication',    title: 'Fabrication & Installation',
+    id: 'fabrication', title: 'Fabrication & Installation',
     desc: 'In-house fabrication and professional installation of all signage and branding solutions across Belgaum.',
     tags: ['Fabrication', 'Installation', 'Site Work', 'Maintenance'],
     stats: { projects: '110+', turnaround: 'Custom' },
@@ -147,16 +147,16 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
   },
   {
-    id: 'corporate-gifts',    title: 'Corporate Gifts',
+    id: 'corporate-gifts', title: 'Corporate Gifts',
     desc: 'Branded corporate gifts, promotional merchandise, and customised giveaways that keep your brand top of mind.',
     tags: ['Gifts', 'Merchandise', 'Branded Items', 'Giveaways'],
     stats: { projects: '50+', turnaround: '5-10 days' },
     benefits: ['Custom branding', 'Bulk orders', 'Wide range', 'Gift packaging'],
     applications: ['Corporate events', 'Client gifts', 'Employee rewards'],
-    image: 'https://images.unsplash.com/photo-1513885535751-8b9238b345a4?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
-    id: 'tshirt-printing',    title: 'T-Shirt Printing',
+    id: 'tshirt-printing', title: 'T-Shirt Printing',
     desc: 'Custom T-shirt printing for corporates, events, teams, and promotions. Bulk orders with quick turnaround.',
     tags: ['T-Shirts', 'Uniforms', 'Bulk', 'Screen Print'],
     stats: { projects: '90+', turnaround: '2-5 days' },
@@ -165,7 +165,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80',
   },
   {
-    id: 'sticker-vinyl',    title: 'Sticker & Vinyl Printing',
+    id: 'sticker-vinyl', title: 'Sticker & Vinyl Printing',
     desc: 'Custom stickers, vinyl decals, floor graphics, and window stickers for branding, labelling, and decoration.',
     tags: ['Stickers', 'Vinyl Decals', 'Floor Graphics', 'Window Film'],
     stats: { projects: '85+', turnaround: '1-3 days' },
@@ -174,7 +174,7 @@ export const SERVICES = [
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
   },
   {
-    id: 'posters-flyers',    title: 'Posters & Flyers',
+    id: 'posters-flyers', title: 'Posters & Flyers',
     desc: 'Eye-catching posters and flyers designed and printed with vivid colours and sharp typography for maximum impact.',
     tags: ['Posters', 'Flyers', 'A3', 'A4'],
     stats: { projects: '150+', turnaround: '24-48h' },
@@ -188,7 +188,7 @@ export const HOME_SERVICES = SERVICES.slice(0, 6)
 
 export const PROJECTS = [
   {
-    id: 'retail-facade',    category: 'ACP Sign Board',
+    id: 'retail-facade', category: 'ACP Sign Board',
     title: 'Retail Store Facade Signage',
     desc: 'Complete outdoor signage for a Belgaum retail brand',
     client: 'Belgaum Retail Co.',
@@ -201,7 +201,7 @@ export const PROJECTS = [
     afterImage: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
   },
   {
-    id: 'fleet-wrap',    category: 'Vehicle Branding',
+    id: 'fleet-wrap', category: 'Vehicle Branding',
     title: 'Fleet Vehicle Wrap',
     desc: 'Full body wrap for a logistics company fleet',
     client: 'Logistics Partner',
@@ -214,7 +214,7 @@ export const PROJECTS = [
     afterImage: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
   },
   {
-    id: 'office-branding',    category: 'Corporate Branding',
+    id: 'office-branding', category: 'Corporate Branding',
     title: 'Office Interior Branding',
     desc: 'Complete interior branding for a tech firm in Belgaum',
     client: 'TechPark Belgaum',
@@ -227,7 +227,7 @@ export const PROJECTS = [
     afterImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
   },
   {
-    id: 'trade-show',    category: 'Exhibition',
+    id: 'trade-show', category: 'Exhibition',
     title: 'Trade Show Booth Setup',
     desc: 'Full exhibition stand for a manufacturing client',
     client: 'FMCG Manufacturer',
@@ -240,7 +240,7 @@ export const PROJECTS = [
     afterImage: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
   },
   {
-    id: 'product-catalogue',    category: 'Offset Printing',
+    id: 'product-catalogue', category: 'Offset Printing',
     title: 'Product Catalogue',
     desc: '100-page full-colour product catalogue for B2B brand',
     client: 'B2B Brand Partner',
@@ -248,9 +248,9 @@ export const PROJECTS = [
     process: ['Content layout', 'Proof approval', 'Offset run', 'Binding & delivery'],
     result: '5000 copies delivered in 7 working days',
     review: 'Consistent quality every single time.',
-    image: 'https://images.unsplash.com/photo-1586953208448-b95f7f86628e?w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80',
     beforeImage: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1586953208448-b95f7f86628e?w=800&q=80',
+    afterImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
   },
 ]
 
@@ -380,20 +380,13 @@ export const GALLERY_ITEMS = [
   { id: 'g6', cat: 'Exhibition', title: 'Trade Show Booth', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80', ratio: 'square' },
   { id: 'g7', cat: 'Sign Boards', title: 'ACP Signage', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80', ratio: 'wide' },
   { id: 'g8', cat: 'Flex Printing', title: 'Outdoor Hoarding', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', ratio: 'square' },
-  { id: 'g9', cat: 'Corporate Branding', title: 'Brand Stationery', image: 'https://images.unsplash.com/photo-1586953208448-b95f7f86628e?w=600&q=80', ratio: 'tall' },
+  { id: 'g9', cat: 'Corporate Branding', title: 'Brand Stationery', image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80', ratio: 'tall' },
   { id: 'g10', cat: 'Vehicle Branding', title: 'Auto Branding', image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', ratio: 'wide' },
-  { id: 'g11', cat: 'Digital Print', title: 'Flyer Design', image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=80', ratio: 'square' },
-  { id: 'g12', cat: 'Exhibition', title: 'Event Backdrop', image: 'https://images.unsplash.com/photo-1505373877841-8d25f39d4686?w=600&q=80', ratio: 'tall' },
+  { id: 'g11', cat: 'Digital Print', title: 'Flyer Design', image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80', ratio: 'square' },
+  { id: 'g12', cat: 'Exhibition', title: 'Event Backdrop', image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&q=80', ratio: 'tall' },
 ]
 
-export const AWARDS = [
-  { icon: '🏆', title: 'ISO Quality Certified', desc: 'Print Production Standards' },
-  { icon: '📜', title: 'MSME Registered', desc: 'Government of India' },
-  { icon: '⭐', title: '5-Star Rated', desc: 'Google Business' },
-  { icon: '🌐', title: 'Facebook Verified', desc: 'nexusmediabelgaum' },
-  { icon: '📸', title: 'Instagram Featured', desc: '@nexusmediabgm' },
-  { icon: '🔢', title: '17,893+ Visitors', desc: 'Website Traffic' },
-]
+
 
 export const TECHNOLOGIES = [
   'HP Latex Printers',

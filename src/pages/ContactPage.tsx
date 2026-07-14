@@ -24,8 +24,8 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="relative min-h-[40vh] pt-[72px]">
-        <div className="container-nx py-16 md:py-20">
+      <section className="relative pt-32 pb-12">
+        <div className="container-nx">
           <SectionLabel>Let&apos;s Talk</SectionLabel>
           <h1 className="mt-6 max-w-3xl text-display-xl font-display font-bold text-primary">
             Get in <span className="text-accent">Touch</span>
@@ -136,12 +136,12 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     <div className="grid gap-5 sm:grid-cols-2">
                       <Input label="Your Name" placeholder="Rahul Kulkarni" required />
-                      <Input label="Phone Number" type="tel" placeholder="+91 98765 43210" />
+                      <Input label="Phone Number" type="tel" placeholder="+91 98765 43210" required />
                     </div>
                     <Input label="Email Address" type="email" placeholder="rahul@company.com" required />
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-primary">Subject</label>
-                      <select className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20">
+                      <select required className="flex h-12 w-full rounded-xl border border-border bg-card px-4 text-sm text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20">
                         <option value="">Select a topic…</option>
                         <option>Digital Printing</option>
                         <option>Sign Board</option>
